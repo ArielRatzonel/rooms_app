@@ -42,19 +42,11 @@ if st.button("Submit"):
     else:
         st.error("Please enter your name before submitting.")
 
-# Display all rooms in a simplified grid layout
-def display_rooms(rooms):
-    for room, details in rooms.items():
-        # Create a collapsible section for each room
-        with st.expander(room, expanded=False):
-            st.write(f"Capacity: {details['capacity']}")
-            occupants = ", ".join(details['occupants']) if details['occupants'] else "Available"
-            st.write(f"Occupants: {occupants}")
-            if len(details['occupants']) < details['capacity']:
-                st.write("Status: 🟢 Available")
-            else:
-                st.write("Status: 🔴 Full")
-
-# Display all rooms in a collapsible format
+# Display all rooms in a simplified grid layout using expander
 st.write("### Current Room Status:")
-display_rooms(rooms)
+for room, details in rooms.items():
+    with st.expander(room, expanded=False):  # Collapsible section for mobile
+        st.write(f"Capacity: {details['capacity']}")
+        occupants = ", ".join(details['occupants']) if details['occupants'] else "Available"
+        st.write(f"Occupants: {occupants}")
+        st.write("Status: 🟢 Available" if len(details['occupants']) < details['capacity'] else "Status: 🔴 Full")
