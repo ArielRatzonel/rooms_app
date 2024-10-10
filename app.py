@@ -5,39 +5,48 @@ import os
 # Define the file to store room data
 ROOM_DATA_FILE = 'room_data.json'
 
-# Initialize room data if not available
-if not os.path.exists(ROOM_DATA_FILE):
-    rooms = {f"Room {i}": {"capacity": 2 if i <= 20 else 3, "occupants": []} for i in range(1, 41)}
+# Function to load room data once and store it in session state
+def load_rooms():
+    if 'rooms' not in st.session_state:
+        if os.path.exists(ROOM_DATA_FILE):
+            with open(ROOM_DATA_FILE, 'r') as f:
+                st.session_state.rooms = json.load(f)
+        else:
+            # Initialize room data if not available
+            rooms = {f"Room {i}": {"capacity": 2 if i <= 20 else 3, "occupants": []} for i in range(1, 41)}
+            with open(ROOM_DATA_FILE, 'w') as f:
+                json.dump(rooms, f)
+            st.session_state.rooms = rooms
+
+# Function to save room data
+def save_rooms():
     with open(ROOM_DATA_FILE, 'w') as f:
-        json.dump(rooms, f)
-else:
-    with open(ROOM_DATA_FILE, 'r') as f:
-        rooms = json.load(f)
+        json.dump(st.session_state.rooms, f)
+
+# Load rooms once (cached in session state for faster interaction)
+load_rooms()
 
 st.title("Camp Room Assignment")
 
-# Display available rooms in a nicer grid layout
+# Display available rooms
 st.write("Select a room and enter your name:")
 
-room_selection = st.selectbox("Choose a room:", [room for room, details in rooms.items() if len(details['occupants']) < details['capacity']])
+room_selection = st.selectbox("Choose a room:", [room for room, details in st.session_state.rooms.items() if len(details['occupants']) < details['capacity']])
 name_input = st.text_input("Enter your name:")
 
 if st.button("Submit"):
     if name_input:
-        rooms[room_selection]['occupants'].append(name_input)
-        
-        # Save the updated data
-        with open(ROOM_DATA_FILE, 'w') as f:
-            json.dump(rooms, f)
-
+        # Add the user's name to the selected room
+        st.session_state.rooms[room_selection]['occupants'].append(name_input)
+        save_rooms()  # Save updated data
         st.success(f"Your name has been added to {room_selection}!")
     else:
         st.error("Please enter your name before submitting.")
 
-# Function to display room info in columns (for grid layout)
+# Display all rooms in a grid layout (no pagination)
 def display_rooms(rooms, cols=3):
     col_list = st.columns(cols)  # Split the page into columns
-    
+
     for i, (room, details) in enumerate(rooms.items()):
         with col_list[i % cols]:  # Distribute rooms across columns
             st.subheader(room)  # Room title
@@ -49,6 +58,6 @@ def display_rooms(rooms, cols=3):
             else:
                 st.write("Status: 🔴 Full")
 
-# Display the current room status in a grid layout
+# Display all rooms in a grid (3 rooms per row)
 st.write("### Current Room Status:")
-display_rooms(rooms)
+display_rooms(st.session_state.rooms)
