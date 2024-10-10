@@ -16,11 +16,10 @@ else:
 
 st.title("Camp Room Assignment")
 
-# Display available rooms
+# Display available rooms in a nicer grid layout
 st.write("Select a room and enter your name:")
 
 room_selection = st.selectbox("Choose a room:", [room for room, details in rooms.items() if len(details['occupants']) < details['capacity']])
-
 name_input = st.text_input("Enter your name:")
 
 if st.button("Submit"):
@@ -35,7 +34,21 @@ if st.button("Submit"):
     else:
         st.error("Please enter your name before submitting.")
 
-# Display the current room status
-st.write("Current Room Status:")
-for room, details in rooms.items():
-    st.write(f"{room} (Capacity: {details['capacity']}): {', '.join(details['occupants']) if details['occupants'] else 'Available'}")
+# Function to display room info in columns (for grid layout)
+def display_rooms(rooms, cols=3):
+    col_list = st.columns(cols)  # Split the page into columns
+    
+    for i, (room, details) in enumerate(rooms.items()):
+        with col_list[i % cols]:  # Distribute rooms across columns
+            st.subheader(room)  # Room title
+            st.write(f"Capacity: {details['capacity']}")
+            occupants = ", ".join(details['occupants']) if details['occupants'] else "Available"
+            st.write(f"Occupants: {occupants}")
+            if len(details['occupants']) < details['capacity']:
+                st.write("Status: 🟢 Available")
+            else:
+                st.write("Status: 🔴 Full")
+
+# Display the current room status in a grid layout
+st.write("### Current Room Status:")
+display_rooms(rooms)
