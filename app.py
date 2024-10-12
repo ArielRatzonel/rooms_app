@@ -47,7 +47,7 @@ def save_user_data(user_data):
 # Load rooms once (cached in session state for faster interaction)
 load_rooms()
 
-st.title("Camp Room Assignment")
+st.title("Rooms assignment ")
 
 # Display available rooms
 st.write("Select a room, enter your name, and choose your hoodie size:")
@@ -79,23 +79,27 @@ if st.button("Submit"):
     else:
         st.error("Please enter your name and select a hoodie size before submitting.")
 
-# Display all rooms in a grid layout (no pagination)
+# Display all rooms in a grid layout (in rows)
 def display_rooms(rooms, cols=3):
-    col_list = st.columns(cols)  # Split the page into columns
-
-    for i, (room, details) in enumerate(rooms.items()):
-        with col_list[i % cols]:  # Distribute rooms across columns
-            st.subheader(room)  # Room title
-            st.write(f"Capacity: {details['capacity']}")
-            
-            # Handle both strings and dictionaries for occupants
-            occupants = ", ".join([occupant["name"] for occupant in details['occupants']]) if details['occupants'] else "Available"
-            
-            st.write(f"Occupants: {occupants}")
-            if len(details['occupants']) < details['capacity']:
-                st.write("Status: 🟢 Available")
-            else:
-                st.write("Status: 🔴 Full")
+    row_count = (len(rooms) + cols - 1) // cols  # Calculate how many rows we need
+    for row in range(row_count):
+        col_list = st.columns(cols)  # Create a new row of columns
+        for col in range(cols):
+            index = row * cols + col
+            if index < len(rooms):
+                room, details = list(rooms.items())[index]  # Get the room and its details
+                with col_list[col]:  # Place the room details in the correct column
+                    st.subheader(room)  # Room title
+                    st.write(f"Capacity: {details['capacity']}")
+                    
+                    # Handle both strings and dictionaries for occupants
+                    occupants = ", ".join([occupant["name"] for occupant in details['occupants']]) if details['occupants'] else "Available"
+                    
+                    st.write(f"Occupants: {occupants}")
+                    if len(details['occupants']) < details['capacity']:
+                        st.write("Status: 🟢 Available")
+                    else:
+                        st.write("Status: 🔴 Full")
 
 # Display all rooms in a grid (3 rooms per row)
 st.write("### Current Room Status:")
