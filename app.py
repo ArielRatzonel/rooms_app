@@ -31,15 +31,20 @@ st.title("Camp Room Assignment")
 # Display available rooms
 st.write("Select a room and enter your name:")
 
-room_selection = st.selectbox("Choose a room:", [room for room, details in st.session_state.rooms.items() if len(details['occupants']) < details['capacity']])
+room_selection = st.selectbox("Choose a room:", 
+                              [room for room, details in st.session_state.rooms.items() if len(details['occupants']) < details['capacity']])
 name_input = st.text_input("Enter your name:")
 
 if st.button("Submit"):
     if name_input:
-        # Add the user's name to the selected room
-        st.session_state.rooms[room_selection]['occupants'].append(name_input)
-        save_rooms()  # Save updated data
-        st.success(f"Your name has been added to {room_selection}!")
+        room_details = st.session_state.rooms[room_selection]
+        if len(room_details['occupants']) < room_details['capacity']:
+            # Add the user's name to the selected room
+            room_details['occupants'].append(name_input)
+            save_rooms()  # Save updated data
+            st.success(f"Your name has been added to {room_selection}!")
+        else:
+            st.error(f"{room_selection} is full! Please choose another room.")
     else:
         st.error("Please enter your name before submitting.")
 
