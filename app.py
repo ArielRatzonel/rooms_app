@@ -14,7 +14,7 @@ def load_rooms():
                 st.session_state.rooms = json.load(f)
         else:
             # Initialize room data if not available
-            rooms = {f"Room {i}": {"capacity": 2 if i <= 51 else 3, "occupants": []} for i in range(1, 70)}
+            rooms = {f"Room {i}": {"capacity": 2 if i <= 51 else 3, "occupants": []} for i in range(1, 71)}
             with open(ROOM_DATA_FILE, 'w') as f:
                 json.dump(rooms, f)
             st.session_state.rooms = rooms
