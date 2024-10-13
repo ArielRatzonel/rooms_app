@@ -14,7 +14,7 @@ def load_rooms():
                 st.session_state.rooms = json.load(f)
         else:
             # Initialize room data if not available
-            rooms = {f"Room {i}": {"capacity": 2 if i <= 20 else 3, "occupants": []} for i in range(1, 41)}
+            rooms = {f"Room {i}": {"capacity": 2 if i <= 51 else 3, "occupants": []} for i in range(1, 70)}
             with open(ROOM_DATA_FILE, 'w') as f:
                 json.dump(rooms, f)
             st.session_state.rooms = rooms
@@ -43,6 +43,16 @@ def save_user_data(user_data):
     # Save back to the file
     with open(USER_DATA_FILE, 'w') as f:
         json.dump(users, f)
+
+# Function to load user data
+def load_user_data():
+    if os.path.exists(USER_DATA_FILE):
+        try:
+            with open(USER_DATA_FILE, 'r') as f:
+                return json.load(f)
+        except json.JSONDecodeError:
+            return []
+    return []
 
 # Load rooms once (cached in session state for faster interaction)
 load_rooms()
@@ -122,3 +132,25 @@ def display_rooms(rooms, cols=3):
 # Display all rooms in a grid (3 rooms per row)
 st.write("### Current Room Status:")
 display_rooms(st.session_state.rooms)
+
+# Section to display the list of users (admin link)
+st.write("---")
+st.write("### Admin Section")
+
+# Password input and direct display of user data if correct
+password = st.text_input("Enter access code to view the user list:", type="password")
+
+if password == "1111":
+    st.success("Access granted.")
+    
+    # Load and display user data
+    user_data = load_user_data()
+    
+    if user_data:
+        st.write("### Full List of Users:")
+        for user in user_data:
+            st.write(f"Name: {user['name']}, Room: {user['room']}, Hoodie Size: {user['hoodie_size']}")
+    else:
+        st.write("No user data available.")
+elif password:
+    st.error("Incorrect access code!")
