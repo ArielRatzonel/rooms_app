@@ -47,22 +47,40 @@ def save_user_data(user_data):
 # Load rooms once (cached in session state for faster interaction)
 load_rooms()
 
-st.title("Rooms assignment ")
+st.title("Shabbaton")
 
-# Display available rooms
-st.write("Select a room, enter your name, and choose your hoodie size:")
+# Function to get room status in the specified format
+def get_room_status(room, details):
+    occupants = details['occupants']
+    capacity = details['capacity']
+    num_occupants = len(occupants)
+    
+    if num_occupants == 0:
+        occupant_status = "Empty Room"
+    else:
+        occupant_status = ", ".join([occupant["name"] for occupant in occupants])
 
-room_selection = st.selectbox("Choose a room:", 
-                              [room for room, details in st.session_state.rooms.items() if len(details['occupants']) < details['capacity']])
+    available_spots = capacity - num_occupants
 
-name_input = st.text_input("Enter your name:")
+    return f"{room}, People in the room: {occupant_status}, Maximum room capacity: {capacity}, Spots available: {available_spots}"
+
+# Display room selection with status in the specified format
+room_selection = st.selectbox(
+    "Choose a room:",
+    [get_room_status(room, details) for room, details in st.session_state.rooms.items() if len(details['occupants']) < details['capacity']]
+)
+
+name_input = st.text_input("Enter your Name and Surname:")
 
 # Adding hoodie size selection
 hoodie_size = st.selectbox("Select your hoodie size:", ['XS', 'S', 'M', 'L', 'XL', 'XXL'])
 
 if st.button("Submit"):
     if name_input and hoodie_size:
-        room_details = st.session_state.rooms[room_selection]
+        # Get selected room (extracting room name before the status details in parentheses)
+        selected_room = room_selection.split(',')[0]
+        room_details = st.session_state.rooms[selected_room]
+        
         # Check if the room is full
         if len(room_details['occupants']) < room_details['capacity']:
             # Add the user's name and hoodie size to the selected room by appending
@@ -70,12 +88,12 @@ if st.button("Submit"):
             save_rooms()  # Save updated room data
             
             # Save the user's data to a separate file
-            user_data = {"name": name_input, "hoodie_size": hoodie_size, "room": room_selection}
+            user_data = {"name": name_input, "hoodie_size": hoodie_size, "room": selected_room}
             save_user_data(user_data)  # Save the new user data
             
-            st.success(f"Your name has been added to {room_selection} with hoodie size {hoodie_size}!")
+            st.success(f"Your name has been added to {selected_room} with hoodie size {hoodie_size}!")
         else:
-            st.error(f"{room_selection} is full! Please choose another room.")
+            st.error(f"{selected_room} is full! Please choose another room.")
     else:
         st.error("Please enter your name and select a hoodie size before submitting.")
 
