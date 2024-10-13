@@ -74,11 +74,19 @@ def get_room_status(room, details):
 
     return f"{room}, {occupant_status}"
 
-# Display room selection with status in the specified format
-room_selection = st.selectbox(
-    "Choose a room: Rooms 1-51 are doubles, rooms 52-70 are triples",
-    [get_room_status(room, details) for room, details in st.session_state.rooms.items() if len(details['occupants']) < details['capacity']]
-)
+# Checkbox for users who don't know who to share a room with
+unsure_checkbox = st.checkbox("I don't know who to share a room with")
+
+# If checkbox is selected, room selection is disabled
+if unsure_checkbox:
+    st.info("You will be assigned to a room later, and we will let you know soon.")
+    room_selection = None
+else:
+    # Display room selection with status in the specified format
+    room_selection = st.selectbox(
+        "Choose a room: Rooms 1-51 are doubles, rooms 52-70 are triples",
+        [get_room_status(room, details) for room, details in st.session_state.rooms.items() if len(details['occupants']) < details['capacity']]
+    )
 
 name_input = st.text_input("Enter your Name and Surname:")
 
@@ -87,23 +95,28 @@ hoodie_size = st.selectbox("Select your hoodie size:", ['XS', 'S', 'M', 'L', 'XL
 
 if st.button("Submit"):
     if name_input and hoodie_size:
-        # Get selected room (extracting room name before the status details in parentheses)
-        selected_room = room_selection.split(',')[0]
-        room_details = st.session_state.rooms[selected_room]
-        
-        # Check if the room is full
-        if len(room_details['occupants']) < room_details['capacity']:
-            # Add the user's name and hoodie size to the selected room by appending
-            room_details['occupants'].append({"name": name_input, "hoodie_size": hoodie_size})
-            save_rooms()  # Save updated room data
-            
-            # Save the user's data to a separate file
-            user_data = {"name": name_input, "hoodie_size": hoodie_size, "room": selected_room}
-            save_user_data(user_data)  # Save the new user data
-            
-            st.success(f"Your name has been added to {selected_room} with hoodie size {hoodie_size}!")
+        # Check if the user doesn't know who to share a room with
+        if unsure_checkbox:
+            selected_room = "Room 0"  # Assign to Room 0 if they are unsure
+            st.success("We will assign you to a room and let you know soon.")
         else:
-            st.error(f"{selected_room} is full! Please choose another room.")
+            # Get selected room (extracting room name before the status details in parentheses)
+            selected_room = room_selection.split(',')[0]
+            room_details = st.session_state.rooms[selected_room]
+            
+            # Check if the room is full
+            if len(room_details['occupants']) < room_details['capacity']:
+                # Add the user's name and hoodie size to the selected room by appending
+                room_details['occupants'].append({"name": name_input, "hoodie_size": hoodie_size})
+                save_rooms()  # Save updated room data
+                st.success(f"Your name has been added to {selected_room} with hoodie size {hoodie_size}!")
+            else:
+                st.error(f"{selected_room} is full! Please choose another room.")
+                st.stop()
+
+        # Save the user's data to a separate file
+        user_data = {"name": name_input, "hoodie_size": hoodie_size, "room": selected_room}
+        save_user_data(user_data)  # Save the new user data
     else:
         st.error("Please enter your name and select a hoodie size before submitting.")
 
