@@ -14,7 +14,7 @@ def load_rooms():
                 st.session_state.rooms = json.load(f)
         else:
             # Initialize room data if not available
-            rooms = {f"Room {i}": {"capacity": 2 if i <= 51 else 3, "occupants": []} for i in range(1, 71)}
+            rooms = {f"#{i}": {"capacity": 2 if i <= 51 else 3, "occupants": []} for i in range(1, 71)}
             with open(ROOM_DATA_FILE, 'w') as f:
                 json.dump(rooms, f)
             st.session_state.rooms = rooms
@@ -66,17 +66,17 @@ def get_room_status(room, details):
     num_occupants = len(occupants)
     
     if num_occupants == 0:
-        occupant_status = "Empty Room"
+        occupant_status = "Empty"
     else:
         occupant_status = ", ".join([occupant["name"] for occupant in occupants])
 
     available_spots = capacity - num_occupants
 
-    return f"{room}, People in the room: {occupant_status}, Maximum room capacity: {capacity}, Spots available: {available_spots}"
+    return f"{room}, {occupant_status}"
 
 # Display room selection with status in the specified format
 room_selection = st.selectbox(
-    "Choose a room:",
+    "Choose a room: Rooms 1-51 are doubles, rooms 52-70 are triples",
     [get_room_status(room, details) for room, details in st.session_state.rooms.items() if len(details['occupants']) < details['capacity']]
 )
 
