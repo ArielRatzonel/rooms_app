@@ -142,8 +142,8 @@ def update_rooms_from_list(manual_data):
 
 # Manual data from the user (your list)
 manual_room_data = """
-Ariel Ratzonel\tSuite Presidential\tM
-Hillel Balas\tSuite Presidential\tM
+Ariel Ratzonel\t#1\tM
+Hillel Balas\t#1\tM
 Rebeca de Toro\t#4\tS
 Raquel Bitan\t#4\tS
 Shirel Assayag\t#5\tM
@@ -184,10 +184,10 @@ Joseph Bensusan Azulay\t#25\tM
 Salomon Benhamu\t#25\tM
 David Martin\t#29\tXL
 Mena Gabizon\t#29\tM
-Jonathan Sultan\t#45\tXL
 Moises Bittan Aserraf\t#45\tM
 Simon Salama Chocron\t#45\tS
-Jack Israel\t#45\tL
+Jonathan Sultan\t#46\tXL
+Jack Israel\t#46\tL
 Meir Bencheluch Aserraf\t#48\tM
 Joseph Benhamu\t#48\tL
 Isabella Sutton\t#49\tS
