@@ -10,14 +10,21 @@ USER_DATA_FILE = 'user_data.json'  # New file for user information
 def load_rooms():
     if 'rooms' not in st.session_state:
         if os.path.exists(ROOM_DATA_FILE):
-            with open(ROOM_DATA_FILE, 'r') as f:
-                st.session_state.rooms = json.load(f)
+            try:
+                with open(ROOM_DATA_FILE, 'r') as f:
+                    st.session_state.rooms = json.load(f)
+            except json.JSONDecodeError:
+                st.session_state.rooms = initialize_rooms()
         else:
-            # Initialize room data if not available
-            rooms = {f"#{i}": {"capacity": 2 if i <= 51 else 3, "occupants": []} for i in range(1, 71)}
-            with open(ROOM_DATA_FILE, 'w') as f:
-                json.dump(rooms, f)
-            st.session_state.rooms = rooms
+            st.session_state.rooms = initialize_rooms()
+
+# Function to initialize rooms if room data file doesn't exist
+def initialize_rooms():
+    rooms = {"Suite Presidential": {"capacity": 2, "occupants": []}}  # Rename Room 1
+    rooms.update({f"#{i}": {"capacity": 2 if i <= 51 else 3, "occupants": []} for i in range(2, 71)})
+    with open(ROOM_DATA_FILE, 'w') as f:
+        json.dump(rooms, f)
+    return rooms
 
 # Function to save room data
 def save_rooms():
@@ -57,68 +64,95 @@ def load_user_data():
 # Load rooms once (cached in session state for faster interaction)
 load_rooms()
 
-st.title("Shabbaton")
-
-# Function to get room status in the specified format
-def get_room_status(room, details):
-    occupants = details['occupants']
-    capacity = details['capacity']
-    num_occupants = len(occupants)
-    
-    if num_occupants == 0:
-        occupant_status = "Empty"
-    else:
-        occupant_status = ", ".join([occupant["name"] for occupant in occupants])
-
-    available_spots = capacity - num_occupants
-
-    return f"{room}, {occupant_status}"
-
-# Checkbox for users who don't know who to share a room with
-unsure_checkbox = st.checkbox("I don't know who to share a room with")
-
-# If checkbox is selected, room selection is disabled
-if unsure_checkbox:
-    st.info("You will be assigned to a room later, and we will let you know soon.")
-    room_selection = None
-else:
-    # Display room selection with status in the specified format
-    room_selection = st.selectbox(
-        "Choose a room: Rooms 1-51 are doubles, rooms 52-70 are triples",
-        [get_room_status(room, details) for room, details in st.session_state.rooms.items() if len(details['occupants']) < details['capacity']]
-    )
-
-name_input = st.text_input("Enter your Name and Surname:")
-
-# Adding hoodie size selection
-hoodie_size = st.selectbox("Select your hoodie size:", ['S', 'M', 'L', 'XL', 'XXL'])
-
-if st.button("Submit"):
-    if name_input and hoodie_size:
-        # Check if the user doesn't know who to share a room with
-        if unsure_checkbox:
-            selected_room = "Room 0"  # Assign to Room 0 if they are unsure
-            st.success("We will assign you to a room and let you know soon.")
-        else:
-            # Get selected room (extracting room name before the status details in parentheses)
-            selected_room = room_selection.split(',')[0]
-            room_details = st.session_state.rooms[selected_room]
+# Function to manually update rooms from a list
+def update_rooms_from_list(manual_data):
+    # Split by newlines and process each line
+    for line in manual_data.strip().split('\n'):
+        name, room, hoodie_size = line.split('\t')
+        room_details = st.session_state.rooms.get(room)
+        
+        # If the room exists and isn't full
+        if room_details and len(room_details['occupants']) < room_details['capacity']:
+            room_details['occupants'].append({"name": name, "hoodie_size": hoodie_size})
             
-            # Check if the room is full
-            if len(room_details['occupants']) < room_details['capacity']:
-                # Add the user's name and hoodie size to the selected room by appending
-                room_details['occupants'].append({"name": name_input, "hoodie_size": hoodie_size})
-                save_rooms()  # Save updated room data
-                st.success(f"Your name has been added to {selected_room} with hoodie size {hoodie_size}!")
-            else:
-                st.error(f"{selected_room} is full! Please choose another room.")
-                st.stop()
+            # Save user data as well
+            user_data = {"name": name, "hoodie_size": hoodie_size, "room": room}
+            save_user_data(user_data)
+        else:
+            st.warning(f"Room {room} is full or does not exist.")
+    
+    save_rooms()  # Save the updated room data after all entries
 
-        # Save the user's data to a separate file
-        user_data = {"name": name_input, "hoodie_size": hoodie_size, "room": selected_room}
-        save_user_data(user_data)  # Save the new user data
-    else:
-        st.error("Please enter your name and select a hoodie size before submitting.")
+# Manual data from the user (your list)
+manual_room_data = """
+Ariel Ratzonel	#1	M
+Hillel Balas	#1	M
+Rebeca de Toro	#4	S
+Raquel Bitan	#4	S
+Shirel Assayag	#5	M
+Myriam Anahory	#5	M
+Nicole Benzaquen	#6	M
+Sarah Belilty	#6	M
+Sarah De Talavera	#7	M
+Dafna Benhamu López-Bleda	#7	M
+Nimrod Abraham	#8	L
+Daniel Museyri	#8	L
+Sol Eisenberg	#9	M
+Debbie Scharf	#9	M
+Guila Chocron	#10	M
+Talia Chocron	#10	M
+Gael Ankaoua	#11	M
+Aryeh Yaacov Salama	#11	M
+Ilan Israel	#14	M
+Elie Halioua	#14	XL
+Mena Nidam	#15	XXL
+Jake Fereres	#15	XXL
+Niso Abecasis	#16	XL
+Armando Berros	#16	L
+Niso Abecasis	#17	XL
+Armando Berros Melul	#17	L
+Moises Ayach	#18	L
+Jacob Benchaya	#18	XL
+Carlos Balas	#19	L
+Isaac Eskenazi	#19	XXL
+Rebeca Levy	#20	M
+Yael Casquet Chocron	#20	M
+Esther Benzaquen	#21	L
+Yael Benhamu	#21	M
+Arie Hassan	#22	S
+Mark Vaisberg	#22	L
+Dalit Taub	#23	L
+Sofía Romano	#23	M
+Joseph Bensusan Azulay	#25	M
+Salomon Benhamu	#25	M
+David Martin	#29	XL
+Mena Gabizon	#29	M
+Jonathan Sultan	#45	XL
+Moises Bittan Aserraf	#45	M
+Simon Salama Chocron	#45	S
+Jack Israel	#45	L
+Meir Bencheluch Aserraf	#48	M
+Joseph Benhamu	#48	L
+Isabella Sutton	#49	S
+Isabella Fincheltub	#49	L
+Martina Steimetz	#50	L
+Nicole Steimetz Kerszberg	#50	L
+Shirly Levi	#52	M
+Alexandra Berman Benhamu	#52	M
+Estrella Benzaquen	#53	S
+Nogah Punturello	#53	S
+Rebeca Levy	#54	M
+Raquel Martin	#54	M
+Michelle Titievsky	#54	M
+Yaniv Salguero	#55	L
+Yoav Salguero	#55	M
+Abraham Amar	#55	L
+"""
+
+# Call function to update rooms from the list
+update_rooms_from_list(manual_room_data)
+
+st.title("Shabbaton")
 
 # Display all rooms in a grid layout (in rows)
 def display_rooms(rooms, cols=3):
