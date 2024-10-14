@@ -148,6 +148,10 @@ def update_rooms_from_list(manual_data):
 manual_room_data = """
 Ariel Ratzonel\t#1\tM
 Hillel Balas\t#1\tM
+Shirly Levi\t#2\tM
+Alexandra Berman Benhamu\t#2\tM
+Estrella Benzaquen\t#3\tS
+Nogah Punturello\t#3\tS
 Rebeca de Toro\t#4\tS
 Raquel Bitan\t#4\tS
 Shirel Assayag\t#5\tM
@@ -196,10 +200,6 @@ Isabella Sutton\t#49\tS
 Isabella Fincheltub\t#49\tL
 Martina Steimetz\t#50\tL
 Nicole Steimetz Kerszberg\t#50\tL
-Shirly Levi\t#52\tM
-Alexandra Berman Benhamu\t#52\tM
-Estrella Benzaquen\t#53\tS
-Nogah Punturello\t#53\tS
 Rebeca Levy\t#54\tM
 Raquel Martin\t#54\tM
 Michelle Titievsky\t#54\tM
