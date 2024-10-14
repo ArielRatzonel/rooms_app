@@ -170,8 +170,6 @@ Mena Nidam\t#15\tXXL
 Jake Fereres\t#15\tXXL
 Niso Abecasis\t#16\tXL
 Armando Berros\t#16\tL
-Niso Abecasis\t#17\tXL
-Armando Berros Melul\t#17\tL
 Moises Ayach\t#18\tL
 Jacob Benchaya\t#18\tXL
 Carlos Balas\t#19\tL
