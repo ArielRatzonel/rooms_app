@@ -121,23 +121,33 @@ if st.button("Submit"):
         st.error("Please enter your name and select a hoodie size before submitting.")
 
 # Function to manually update rooms from the provided list
+# Function to manually update rooms from the provided list
 def update_rooms_from_list(manual_data):
     # Split by newlines and process each line
     for line in manual_data.strip().split('\n'):
-        name, room, hoodie_size = line.split('\t')
-        room_details = st.session_state.rooms.get(room)
-        
-        # If the room exists and isn't full
-        if room_details and len(room_details['occupants']) < room_details['capacity']:
-            room_details['occupants'].append({"name": name, "hoodie_size": hoodie_size})
+        try:
+            name, room, hoodie_size = line.split('\t')
+            room_details = st.session_state.rooms.get(room)
             
-            # Save user data as well
-            user_data = {"name": name, "hoodie_size": hoodie_size, "room": room}
-            save_user_data(user_data)
-        else:
-            st.warning(f"Room {room} is full or does not exist.")
-    
-    save_rooms()  # Save the updated room data after all entries
+            # If the room exists
+            if room_details:
+                # Check if the room is full
+                if len(room_details['occupants']) < room_details['capacity']:
+                    room_details['occupants'].append({"name": name, "hoodie_size": hoodie_size})
+                    
+                    # Save user data as well
+                    user_data = {"name": name, "hoodie_size": hoodie_size, "room": room}
+                    save_user_data(user_data)
+                else:
+                    st.warning(f"Room {room} is full. Cannot add {name}.")
+            else:
+                st.error(f"Room {room} does not exist.")
+        except ValueError:
+            st.error(f"Invalid data format for line: {line}")
+
+    # Save the updated room data after processing all entries
+    save_rooms()
+
 
 # Manual data from the user (your list)
 manual_room_data = """
