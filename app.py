@@ -15,7 +15,6 @@ def load_rooms():
         else:
             # Initialize room data if not available
             rooms = {f"#{i}": {"capacity": 2 if i <= 51 else 3, "occupants": []} for i in range(1, 71)}
-            rooms["Suite Presidential"] = {"capacity": 2, "occupants": []}  # Add Suite Presidential as room #1
             with open(ROOM_DATA_FILE, 'w') as f:
                 json.dump(rooms, f)
             st.session_state.rooms = rooms
@@ -204,6 +203,9 @@ Michelle Titievsky\t#54\tM
 Yaniv Salguero\t#55\tL
 Yoav Salguero\t#55\tM
 Abraham Amar\t#55\tL
+Arie Benzadón\t#57\tM
+Eyal Nahon\t#57\tS
+Mijael Coen\t#57\tS
 """
 
 # Call the update function with the manual data
