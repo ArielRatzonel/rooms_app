@@ -91,7 +91,7 @@ else:
 name_input = st.text_input("Enter your Name and Surname:")
 
 # Adding hoodie size selection
-hoodie_size = st.selectbox("Select your hoodie size:", ['S', 'M', 'L', 'XL', 'XXL'])
+hoodie_size = st.selectbox("Select your hoodie size:", ['S','L', 'XL', 'XXL'])
 
 if st.button("Submit"):
     if name_input and hoodie_size:
@@ -214,8 +214,11 @@ Yamila Abraham\t#12\tM
 Susan balas picciotto\t#51\tM
 Valentina Bendiske Goldstein\t#51\tM
 Tom Treiband\t#35\tL
-Taliah Lasry\t#26\tM
 Alexis Taub\t#35\tL
+Federico Alberio\t#27\tM
+Brandon Tub\t#27\tM
+Moshe Bittan\t#17\tL
+Yosef Benzaquen\t#17\tM
 """
 
 # Call the update function with the manual data
