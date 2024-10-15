@@ -222,7 +222,7 @@ Yosef Benzaquen\t#17\tM
 Alberto Elejalde\t#13\tL
 Armando Benaim\t#13\tL
 Taliah Lasry\t#26\tM
-Noemi Benhamu\t#26\tS
+Noemi Benhamu\t#26\tM
 
 """
 
