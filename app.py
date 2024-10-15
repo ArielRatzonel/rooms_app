@@ -148,10 +148,10 @@ def update_rooms_from_list(manual_data):
 manual_room_data = """
 Ariel Ratzonel\t#1\tM
 Hillel Balas\t#1\tM
+Yael Martin\t#2\tL
+Clara Martin\t#2\tXL
 Rebeca de Toro\t#4\tS
 Raquel Bitan\t#4\tS
-Shirel Assayag\t#5\tM
-Myriam Anahory\t#5\tM
 Nicole Benzaquen\t#6\tM
 Sarah Belilty\t#6\tM
 Sarah De Talavera\t#7\tM
@@ -227,6 +227,9 @@ Esther Benguigui\t#60\tL
 Niso Abecasis\t#61\tXL
 Armando Berros\t#61\tL
 Alberto Bentolila\t#61\tL
+Shirel Assayag\t#62\tM
+Myriam Anahory\t#62\tM
+Karen Halioua\t#62\tS
 """
 
 # Call the update function with the manual data
