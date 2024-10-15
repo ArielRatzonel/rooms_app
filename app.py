@@ -206,7 +206,6 @@ Martina Steimetz\t#50\tL
 Nicole Steimetz Kerszberg\t#50\tL
 Susan balas picciotto\t#51\tM
 Valentina Bendiske Goldstein\t#51\tM
-Simon Sebban\t#52\tM
 Rebeca Levy\t#54\tM
 Raquel Martin\t#54\tM
 Michelle Titievsky\t#54\tM
