@@ -214,11 +214,8 @@ Yamila Abraham\t#12\tM
 Susan balas picciotto\t#51\tM
 Valentina Bendiske Goldstein\t#51\tM
 Tom Treiband\t#35\tL
-Martina Volman\t#56\tL
-Federico Alberio\t#13\tM
 Taliah Lasry\t#26\tM
 Alexis Taub\t#35\tL
-Simon Sebban\t#58\tM
 """
 
 # Call the update function with the manual data
