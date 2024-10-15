@@ -148,10 +148,6 @@ def update_rooms_from_list(manual_data):
 manual_room_data = """
 Ariel Ratzonel\t#1\tM
 Hillel Balas\t#1\tM
-Shirly Levi\t#2\tM
-Alexandra Berman Benhamu\t#2\tM
-Estrella Benzaquen\t#3\tS
-Nogah Punturello\t#3\tS
 Rebeca de Toro\t#4\tS
 Raquel Bitan\t#4\tS
 Shirel Assayag\t#5\tM
@@ -168,17 +164,19 @@ Guila Chocron\t#10\tM
 Talia Chocron\t#10\tM
 Gael Ankaoua\t#11\tM
 Aryeh Yaacov Salama\t#11\tM
-Ilan Israel\t#14\tM
-Elie Halioua\t#14\tXL
+Valeria Benain\t#12\tM
+Yamila Abraham\t#12\tM
+Alberto Elejalde\t#13\tL
+Armando Benaim\t#13\tL
 Mena Nidam\t#15\tXXL
-Jake Fereres\t#15\tXXL
-Niso Abecasis\t#16\tXL
-Armando Berros\t#16\tL
+Dani Benguigui\t#15\tL
+Moshe Bittan\t#17\tL
+Yosef Benzaquen\t#17\tM
 Moises Ayach\t#18\tL
 Jacob Benchaya\t#18\tXL
 Carlos Balas\t#19\tL
 Isaac Eskenazi\t#19\tXXL
-Rebeca Levy\t#20\tM
+Miriam Martin\t#20\tM
 Yael Casquet Chocron\t#20\tM
 Esther Benzaquen\t#21\tL
 Yael Benhamu\t#21\tM
@@ -188,8 +186,14 @@ Dalit Taub\t#23\tL
 Sofía Romano\t#23\tM
 Joseph Bensusan Azulay\t#25\tM
 Salomon Benhamu\t#25\tM
+Taliah Lasry \t#26\tM
+Noemi Benhamu\t#26\tM
+Federico Alberio\t#27\tM
+Brandon Tub\t#27\tM
 David Martin\t#29\tXL
 Mena Gabizon\t#29\tM
+Alexis Taub\t#35\tL
+Tom Treiband\t#35\tL
 Moises Bittan Aserraf\t#45\tM
 Simon Salama Chocron\t#45\tS
 Jonathan Sultan\t#46\tXL
@@ -200,6 +204,9 @@ Isabella Sutton\t#49\tS
 Isabella Fincheltub\t#49\tL
 Martina Steimetz\t#50\tL
 Nicole Steimetz Kerszberg\t#50\tL
+Susan balas picciotto\t#51\tM
+Valentina Bendiske Goldstein\t#51\tM
+Simon Sebban\t#52\tM
 Rebeca Levy\t#54\tM
 Raquel Martin\t#54\tM
 Michelle Titievsky\t#54\tM
@@ -209,22 +216,18 @@ Abraham Amar\t#55\tL
 Arie Benzadón\t#57\tM
 Eyal Nahon\t#57\tS
 Mijael Coen\t#57\tS
-Valeria Benain\t#12\tM
-Yamila Abraham\t#12\tM
-Susan balas picciotto\t#51\tM
-Valentina Bendiske Goldstein\t#51\tM
-Tom Treiband\t#35\tL
-Alexis Taub\t#35\tL
-Federico Alberio\t#27\tM
-Brandon Tub\t#27\tM
-Moshe Bittan\t#17\tL
-Yosef Benzaquen\t#17\tM
-Alberto Elejalde\t#13\tL
-Armando Benaim\t#13\tL
-Taliah Lasry\t#26\tM
-Noemi Benhamu\t#26\tM
-Simon Sebban\t#52\tM
-
+Ilan Israel\t#58\tM
+Elie Halioua\t#58\tXL
+Jake Ferres\t#58\tXXL
+Shirly Levi\t#59\tM
+Alexandra Berman Benhamu\t#59\tM
+Anabelle Hassan\t#59\tS
+Raquel Sutton\t#60\tS
+Judith Benguigui\t#60\tL
+Esther Benguigui\t#60\tL
+Niso Abecasis\t#61\tXL
+Armando Berros\t#61\tL
+Alberto Bentolila\t#61\tL
 """
 
 # Call the update function with the manual data
