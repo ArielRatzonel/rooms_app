@@ -150,6 +150,8 @@ Ariel Ratzonel\t#1\tM
 Hillel Balas\t#1\tM
 Yael Martin\t#2\tL
 Clara Martin\t#2\tXL
+Estrella Benzaquen\t#3\tS
+Yojheved Benguigui\t#3\tL
 Rebeca de Toro\t#4\tS
 Raquel Bitan\t#4\tS
 Sarah Liberman\t#5\tL
@@ -208,6 +210,8 @@ Natalia Benzaquen\t#42\tL
 Andrea Israel\t#42\tS
 Noa Israel\t#43\tL
 Karen Chokron\t#43\tL
+Hugo Halimi\t#44\tL
+Izel Nakri\t#44\tL
 Moises Bittan Aserraf\t#45\tM
 Simon Salama Chocron\t#45\tS
 Jonathan Sultan\t#46\tXL
@@ -249,6 +253,15 @@ Alberto Bentolila\t#61\tL
 Shirel Assayag\t#62\tM
 Myriam Anahory\t#62\tM
 Karen Halioua\t#62\tS
+Natanel Cohen\t#63\tXL
+Yosef Bentolila\t#63\tL
+Jaime Benhamu\t#63\tL
+Daniel de Toro\t#64\tS
+Simón Wahnich\t#64\tL
+Isaac Bendayan\t#64\tXL
+Ricardo Herman\t#69\tXXL
+Joey Sasson\t#69\tL
+Bernardo Drezner\t#69\tL
 
 
 """
