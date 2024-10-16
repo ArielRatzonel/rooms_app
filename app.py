@@ -152,6 +152,8 @@ Yael Martin\t#2\tL
 Clara Martin\t#2\tXL
 Rebeca de Toro\t#4\tS
 Raquel Bitan\t#4\tS
+Sarah Liberman\t#5\tL
+Erika Mahler\t#5\tL
 Nicole Benzaquen\t#6\tM
 Sarah Belilty\t#6\tM
 Sarah De Talavera\t#7\tM
@@ -170,6 +172,8 @@ Alberto Elejalde\t#13\tL
 Armando Benaim\t#13\tL
 Mena Nidam\t#15\tXXL
 Dani Benguigui\t#15\tL
+Geffen Goldstein\t#16\tS
+Hannah Newman\t#16\tL
 Moshe Bittan\t#17\tL
 Yosef Benzaquen\t#17\tM
 Moises Ayach\t#18\tL
@@ -192,12 +196,24 @@ Federico Alberio\t#27\tM
 Brandon Tub\t#27\tM
 David Martin\t#29\tXL
 Mena Gabizon\t#29\tM
+Ed Gittelman\t#31\tL
+Nathan Kauffman\t#31\tXL
+Joseph Cohen Molina\t#33\tL
+Eliav Abergel\t#33\tL
 Alexis Taub\t#35\tL
 Tom Treiband\t#35\tL
+Ilay Galron\t#36\tL
+Yoel Chocron\t#36\tL
+Natalia Benzaquen\t#42\tL
+Andrea Israel\t#42\tS
+Noa Israel\t#43\tL
+Karen Chokron\t#43\tL
 Moises Bittan Aserraf\t#45\tM
 Simon Salama Chocron\t#45\tS
 Jonathan Sultan\t#46\tXL
 Jack Israel\t#46\tL
+Ethan Bendahan\t#47\tXL
+Bar Ben Avraham\t#47\tXL
 Meir Bencheluch Aserraf\t#48\tM
 Joseph Benhamu\t#48\tL
 Isabella Sutton\t#49\tS
@@ -212,6 +228,9 @@ Michelle Titievsky\t#54\tM
 Yaniv Salguero\t#55\tL
 Yoav Salguero\t#55\tM
 Abraham Amar\t#55\tL
+Martina Volman\t#56\tL
+Daniel Benguiat\t#56\tS
+Aliza Palatchi\t#56\tL
 Arie Benzadón\t#57\tM
 Eyal Nahon\t#57\tS
 Mijael Coen\t#57\tS
@@ -230,6 +249,8 @@ Alberto Bentolila\t#61\tL
 Shirel Assayag\t#62\tM
 Myriam Anahory\t#62\tM
 Karen Halioua\t#62\tS
+
+
 """
 
 # Call the update function with the manual data
