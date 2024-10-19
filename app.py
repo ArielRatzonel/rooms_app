@@ -172,6 +172,8 @@ Valeria Benain\t#12\tM
 Yamila Abraham\t#12\tM
 Alberto Elejalde\t#13\tL
 Armando Benaim\t#13\tL
+Room not available\t#14\tS
+Room not available\t#14\tS
 Mena Nidam\t#15\tXXL
 Dani Benguigui\t#15\tL
 Geffen Goldstein\t#16\tS
@@ -190,6 +192,8 @@ Arie Hassan\t#22\tS
 Mark Vaisberg\t#22\tL
 Dalit Taub\t#23\tL
 Sofía Romano\t#23\tM
+Abi Heiman\t#24\tL
+Laura Abkin\t#24\tL
 Joseph Bensusan Azulay\t#25\tM
 Salomon Benhamu\t#25\tM
 Taliah Lasry \t#26\tM
@@ -198,14 +202,26 @@ Federico Alberio\t#27\tM
 Brandon Tub\t#27\tM
 David Martin\t#29\tXL
 Mena Gabizon\t#29\tM
+Elisa Yojebed\t#30\tXL
+Eli Hayon\t#30\tL
 Ed Gittelman\t#31\tL
 Nathan Kauffman\t#31\tXL
 Joseph Cohen Molina\t#33\tL
 Eliav Abergel\t#33\tL
+Fernando Askelrad\t#34\tS
+Omri Simon\t#34\tL
 Alexis Taub\t#35\tL
 Tom Treiband\t#35\tL
 Ilay Galron\t#36\tL
 Yoel Chocron\t#36\tL
+Room not available\t#38\tS
+Room not available\t#38\tS
+Room not available\t#39\tS
+Room not available\t#39\tS
+Room not available\t#40\tS
+Room not available\t#40\tS
+Room not available\t#41\tS
+Room not available\t#41\tS
 Natalia Benzaquen\t#42\tL
 Andrea Israel\t#42\tS
 Noa Israel\t#43\tL
@@ -259,10 +275,12 @@ Jaime Benhamu\t#63\tL
 Daniel de Toro\t#64\tS
 Simón Wahnich\t#64\tL
 Isaac Bendayan\t#64\tXL
+Meir Hayon Tangir\t#66\tS
+Moises Ayach\t#66\tL
+Jacob Benchaya\t#66\tXL
 Ricardo Herman\t#69\tXXL
 Joey Sasson\t#69\tL
 Bernardo Drezner\t#69\tL
-
 
 """
 
