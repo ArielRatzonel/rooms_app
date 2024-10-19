@@ -214,6 +214,8 @@ Alexis Taub\t#35\tL
 Tom Treiband\t#35\tL
 Ilay Galron\t#36\tL
 Yoel Chocron\t#36\tL
+Anna Karan\t#37\tL
+Jamie Eisner\t#37\tS
 Room not available\t#38\tS
 Room not available\t#38\tS
 Room not available\t#39\tS
